@@ -34,12 +34,11 @@ const findOneById = async (id) => {
 
 const pushCardOrderIds = async (card) => {
   try {
-    const result = await GET_DB().collection(COLUMN_COLLECTION_NAME).findOneAndUpdate(
+    return await GET_DB().collection(COLUMN_COLLECTION_NAME).findOneAndUpdate(
       { _id: new ObjectId(card.columnId) },
       { $push: { cardOrderIds: new ObjectId(card._id) } },
       { returnDocument: 'after' }
     )
-    return result.value
   } catch (error) { throw new Error(error) }
 }
 
